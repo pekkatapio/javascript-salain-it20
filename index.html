@@ -9,7 +9,28 @@
         let teksti = document.getElementById("teksti").value;
         let korvattavat = document.getElementById("korvattavat").value;
         let korvaavat = document.getElementById("korvaavat").value;
-        console.log(teksti);
+        let salattu = "";
+
+        teksti = teksti.toUpperCase();
+        
+        korvattavat = korvattavat + "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
+        
+        korvaavat = korvaavat + "•".repeat(korvattavat.length);
+        
+        for (let index=0; index<teksti.length; index++) {
+          let merkki = teksti.charAt(index);
+          let paikka = korvattavat.indexOf(merkki);
+          if (paikka >= 0) {
+            let korvaava = korvaavat.charAt(paikka);
+            console.log(merkki + " " + paikka + " --> " + korvaava);          
+            salattu = salattu + korvaava;
+          } else {
+            salattu = salattu + merkki;  
+          }
+        }
+
+        document.getElementById("salattu").value = salattu;
+
       } 
 
     </script>
@@ -29,6 +50,7 @@
            id="korvattavat" 
            name="korvattavat"
            size="50"
+           oninput="salaa()"
            value="ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ">
 
     <div>Korvaavat merkit:</div>
@@ -36,6 +58,7 @@
            id="korvaavat" 
            name="korvaavat"
            size="50"
+           oninput="salaa()"
            value="XYZÅÄÖABCDEFGHIJKLMNOPQRSTUVW">
 
     <div><button onclick="salaa()">SALAA</button></div>
