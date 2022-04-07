@@ -33,6 +33,22 @@
 
       } 
 
+      function sekoita() {
+        let korvattavat = "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ";
+        let korvaustaulu = korvattavat.split('');
+        for (let index = 0; index < korvaustaulu.length; index++) {
+          let arvottu = Math.floor(Math.random() * korvaustaulu.length);
+          let temp = korvaustaulu[index];
+          korvaustaulu[index] = korvaustaulu[arvottu];
+          korvaustaulu[arvottu] = temp;
+        }
+        let korvaavat = korvaustaulu.join('');
+        document.getElementById('korvattavat').value = korvattavat;
+        document.getElementById('korvaavat').value = korvaavat;
+        salaa();
+      }
+
+
     </script>
   </head>
   <body>
@@ -61,7 +77,7 @@
            oninput="salaa()"
            value="XYZÅÄÖABCDEFGHIJKLMNOPQRSTUVW">
 
-    <div><button onclick="salaa()">SALAA</button></div>
+    <div><button onclick="sekoita()">SEKOITA</button></div>
 
     <div>Salattu:</div>
     <textarea id="salattu" 
